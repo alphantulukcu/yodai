@@ -28,6 +28,7 @@
             max-width: 1000px;
             margin-left: auto;
             margin-right: auto;
+            border-radius: 25%;
         }
         h2 {
             border-bottom: 2px solid #333;
@@ -80,9 +81,9 @@
     <section>
         <h2>Documents</h2>
         <ul id="documentList">
-            <li><a href="#" onclick="showPDF('documents/study1.pdf')">Document 1</a></li>
-            <li><a href="#" onclick="showPDF('documents/study2.pdf')">Document 2</a></li>
-            <li><a href="#" onclick="showPDF('documents/study3.pdf')">Document 3</a></li>
+            <li><a href="#" onclick="togglePDF('documents/document1.pdf')">Document 1</a></li>
+            <li><a href="#" onclick="togglePDF('documents/document2.pdf')">Document 2</a></li>
+            <li><a href="#" onclick="togglePDF('documents/document3.pdf')">Document 3</a></li>
         </ul>
 
         <!-- Hidden iframe, which will be shown when a document is clicked -->
@@ -126,11 +127,22 @@
     </footer>
 
     <script>
-        // Function to display the selected PDF
-        function showPDF(pdfUrl) {
+        var currentPDF = ""; // Store the currently displayed PDF
+
+        // Function to toggle the PDF viewer
+        function togglePDF(pdfUrl) {
             var iframe = document.getElementById('pdfViewer');
-            iframe.src = pdfUrl;
-            iframe.style.display = 'block'; // Show the iframe when a PDF is selected
+            
+            if (currentPDF === pdfUrl) {
+                // If the same PDF is clicked again, hide the iframe
+                iframe.style.display = 'none';
+                currentPDF = ""; // Reset the current PDF
+            } else {
+                // Show the iframe with the new PDF
+                iframe.src = pdfUrl;
+                iframe.style.display = 'block';
+                currentPDF = pdfUrl; // Update the current PDF
+            }
         }
     </script>
 
